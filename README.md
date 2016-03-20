@@ -1,2 +1,1 @@
-# WeiXin
-微信支付
+# anychat
