@@ -80,14 +80,73 @@
 - (void)sendImageContent {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"res1" ofType:@"jpg"];
     NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+//    UIImage *thumbImage = [UIImage imageNamed:@"res1thumb.png"];
     
-    UIImage *thumbImage = [UIImage imageNamed:@"res1thumb.png"];
+    NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://weixintest.ihk.cn/ihkwx_upload/heji/material/img/20160414/1460616012469.jpg"]];
+    NSData *compImg = [self checkThumbImageSize:imgData];
+
     [WXApiRequestHandler sendImageData:imageData
                                TagName:kImageTagName
                             MessageExt:kMessageExt
                                 Action:kMessageAction
-                            ThumbImage:thumbImage
+                            ThumbImage:[UIImage imageWithData:compImg]
                                InScene:_currentScene];
+}
+
+- (NSData *)checkThumbImageSize:(NSData *)thumbImageData
+{
+    static NSInteger maxThumbImageDataLen = 32 * 1024;
+    static CGFloat thumbImageCompressionQuality = 0.75;
+    
+//    if (thumbImageData.length > maxThumbImageDataLen)
+//    {
+//        UIImage *image = [[UIImage alloc] initWithData:thumbImageData];
+//        NSData *data = UIImageJPEGRepresentation(image, 0.5);
+//        
+//        if (data.length > maxThumbImageDataLen)
+//        {
+//            if(image.size.width > 400 || image.size.height > 400)
+//            {
+//                //尺寸减到400＊400
+//                image = [MOBFImage scaleImage:image withSize:CGSizeMake(400, 400)];
+//                data = UIImageJPEGRepresentation(image, 0.5);
+//            }
+//            
+//            if (data.length > maxThumbImageDataLen)
+//            {
+//                //尺寸减到250＊250
+//                if (image.size.width > 250 || image.size.height > 250)
+//                {
+//                    image = [MOBFImage scaleImage:image withSize:CGSizeMake(250, 250)];
+//                    data = UIImageJPEGRepresentation(image, thumbImageCompressionQuality);
+//                }
+//                
+//                if(data.length > maxThumbImageDataLen)
+//                {
+//                    //尺寸减到200＊200
+//                    if (image.size.width > 150 || image.size.height > 150)
+//                    {
+//                        image = [MOBFImage scaleImage:image withSize:CGSizeMake(150, 150)];
+//                        data = UIImageJPEGRepresentation(image, thumbImageCompressionQuality);
+//                    }
+//                    
+//                    if (data.length > maxThumbImageDataLen)
+//                    {
+//                        if (image.size.width > 100 || image.size.height > 100)
+//                        {
+//                            //尺寸减到100*100
+//                            image = [MOBFImage scaleImage:image withSize:CGSizeMake(100, 100)];
+//                            data = UIImageJPEGRepresentation(image, thumbImageCompressionQuality);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//        thumbImageData = data;
+//    }
+    
+    return thumbImageData;
 }
 
 - (void)sendLinkContent {
@@ -193,16 +252,7 @@
     cardItem.extMsg = @"{\"code\": \"\", \"openid\": \"\", \"timestamp\": \"1418301401\", \"signature\":\"f54dae85e7807cc9525ccc127b4796e021f05b33\"}";
     [WXApiRequestHandler addCardsToCardPackage:[NSArray arrayWithObjects:cardItem,cardItem, nil]];
 }
-- (void)bizPay {
-    NSString *res = [WXApiRequestHandler jumpToBizPay];
-    if( ![@"" isEqual:res] ){
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"支付失败" message:res delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 
-        [alter show];
-        [alter release];
-    }
-
-}
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -446,7 +496,6 @@
     ADDBUTTON_AUTORELEASE(index++, @"发送文件消息给微信", @selector(sendFileContent));
     ADDBUTTON_AUTORELEASE(index++, @"添加单张卡券至卡包", @selector(addCardToWXCardPackage));
     ADDBUTTON_AUTORELEASE(index++, @"添加多张卡券至卡包", @selector(batchAddCardToWXCardPackage));
-    ADDBUTTON_AUTORELEASE(index++, @"发起微信支付", @selector(bizPay));
 }
 
 @end
