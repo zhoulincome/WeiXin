@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZLWeiXinPay"
-  s.version      = "1.7.3"
+  s.version      = "1.7.4"
   s.summary      = "2016.9.12最新sdk"
   s.homepage     = "https://github.com/zhoulincome/WeiXin"
   s.license      = "MIT"
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source_files  = "SDKExport/*.{h,m}"
   s.frameworks = "Security", "SystemConfiguration", "CoreTelephony"
   s.libraries = "z", "sqlite3.0", "c++"
-  s.vendored_libraries = "SDKExport/*.a"
+  s.vendored_libraries = ['SDKExport/libWeChatSDK.a']
   s.requires_arc = true
 end
 
