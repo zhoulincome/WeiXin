@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source_files  = "SDKExport/*.{h,m}"
   s.frameworks = "Security", "SystemConfiguration", "CoreTelephony"
   s.libraries = "z", "sqlite3.0", "c++"
-  s.vendored_libraries = ['SDKExport/libWeChatSDK.a']
+  s.vendored_libraries = ["SDKExport/libWeChatSDK.a"]
   s.requires_arc = true
 end
 
