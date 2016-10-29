@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ViewController/SendMsgToWeChatViewController.m"
-            timestampString = "486456058.162213"
+            filePath = "Helper/GetMessageFromWXResp+responseWithTextOrMediaMessage.m"
+            timestampString = "470025190.367327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "-sendImageContent"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "+responseWithText:OrMediaMessage:bText:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ZLWeiXinPay"
-  s.version      = "1.7.4"
+  s.version      = "1.7.5"
   s.summary      = "2016.9.12最新sdk"
   s.homepage     = "https://github.com/zhoulincome/WeiXin"
   s.license      = "MIT"
